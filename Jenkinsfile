@@ -1,19 +1,15 @@
 pipeline {
-    agent {
-        docker {
-            image 'php:8.1-cli'
-        }
-    }
+    agent any
 
     environment {
-        DOCKER_IMAGE = 'rajeshthiruvalla/laravel-app'  // <-- Replace this
+        DOCKER_IMAGE = 'rajeshthiruvalla/laravel-app'
         DOCKER_TAG = 'latest'
-        EC2_HOST = 'ec2-user@your-ec2-public-ip'           // <-- Replace this
-        EC2_KEY = credentials('ec2-ssh-key')               // Jenkins credential ID for SSH key
+        EC2_HOST = 'ubuntu@13.126.245.58'
+        EC2_KEY = credentials('ec2-ssh-key') // Jenkins SSH key credential
     }
 
     stages {
-        stage('Clone Repo') {
+        stage('Clone Repository') {
             steps {
                 checkout scm
             }
